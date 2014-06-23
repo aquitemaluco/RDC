@@ -1,18 +1,13 @@
 #ifndef OBSERVER_H
 #define OBSERVER_H
 
-	typedef struct {
-		void *object;
-		void (*notify)(void *data);
-	} sinet_observable_t;
+typedef struct __sinet_observer {
+	void * object;
+	void (*notify)(struct __sinet_observer *, void *);
+} sinet_observer_t;
 
-	typedef struct {
-		void ** observer_collection;
-	} sinet_observer_t;
-
-	sinet_register_object(sinet_observer_t observer, void *object);
-	sinet_notify_objects(sinet_observer_t observer);
-
+sinet_observer_t * sinet_new_observer(void *,
+		void(*)(sinet_observer_t *, void *));
 
 #endif
 
